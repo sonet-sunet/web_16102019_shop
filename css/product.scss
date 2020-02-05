@@ -1,0 +1,21 @@
+.product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &-photo{
+        background-color: #cccccc;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 500px;
+        width: 100%;
+    }
+    &-addtocart{
+        padding: 10px 20px;
+        color: #ffffff;
+        background-color: orange;
+        margin-top: 25px;
+        cursor: pointer;
+    }
+}
