@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Янв 27 2020 г., 09:50
+-- Время создания: Фев 07 2020 г., 09:57
 -- Версия сервера: 10.1.37-MariaDB
 -- Версия PHP: 7.3.1
 
@@ -81,6 +81,28 @@ INSERT INTO `catalogs_products` (`id`, `product_id`, `catalog_id`) VALUES
 (15, 14, 1),
 (16, 15, 1),
 (17, 16, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `managers`
+--
+
+CREATE TABLE IF NOT EXISTS `managers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fio` varchar(255) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `pass` varchar(100) NOT NULL,
+  `access` varchar(10) NOT NULL DEFAULT 'NO',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `managers`
+--
+
+INSERT INTO `managers` (`id`, `fio`, `email`, `pass`, `access`) VALUES
+(1, 'Вячеслав Жуков', 'slava.zhukov@gmail.com', 'admin', 'YES');
 
 -- --------------------------------------------------------
 
