@@ -110,37 +110,3 @@ class Catalog{
 
 let catalog = new Catalog();
 catalog.load();
-
-// let xhr = new XMLHttpRequest();
-
-// xhr.open('GET', '/handlers/catalog_handler.php');
-// xhr.send();
-
-// xhr.addEventListener('load', ()=>{
-//     let data = JSON.parse(xhr.responseText);
-//     // let data1 = data.products[0];
-//     // let data2 = data.products[1]
-//     // console.log(data);
-
-//     // let product = new Products(data1.id, data1.active, data1.name, 
-//     //     data1.price, data1.photo, data1.sku, data1.description);
-
-//     // let product2 = new Products(data2.id, data2.active, data2.name, 
-//     //     data2.price, data2.photo, data2.sku, data2.description);
-    
-//     // document.querySelector('.catalog-products').appendChild( product.getElement() );
-//     // document.querySelector('.catalog-products').appendChild( product2.getElement() );
-
-//     data.products.forEach((item)=>{
-//         let product = new Products(item.id, item.active, item.name, 
-//             item.price, item.photo, item.sku, item.description); 
-
-//         document.querySelector('.catalog-products').appendChild( product.getElement() );      
-//     });
-// });
-
-
-/**
- * Создать класс Products
- * Свойста такие же как в БД
- */

@@ -25,7 +25,19 @@
 <div class="catalog" data-catalog-id="<?=$template['catalog']['id']?>">
     <h1 class="catalog-h1"><?=$template['catalog']['name']?></h1>
     <p class="catalog-description">Все товары</p>
-    <div class="catalog-filters"></div>
+    <div class="catalog-filters">
+        <form class="catalog-filters-form" method="GET">
+            <select class="catalog-filters-form-first" name="firstList">
+                <option value="Категория" disabled selected></option>
+            </select>
+            <select class="catalog-filters-form-second" name="secondList">
+                <option value="Размер" disabled selected></option>
+            </select>
+            <select class="catalog-filters-form-third" name="thirdList">
+                <option value="Стоимость" disabled selected></option>
+            </select>
+        </form>
+    </div>
     <div class="catalog-products"></div>
     <div class="catalog-pagination">
         

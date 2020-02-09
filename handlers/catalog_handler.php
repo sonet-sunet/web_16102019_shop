@@ -6,7 +6,8 @@
         'pagination'=>[
             'nowPage'=> 1,
             'countPage'=> 1
-        ]
+        ],
+        'filters' => []
     ];
 
     $products_on_page = 3;
@@ -46,6 +47,13 @@
 
     }
 
+    
+    $sql = "SELECT * FROM catalog_filters";
+    $result = mysqli_query($db, $sql);
+    
+    while( $row = mysqli_fetch_assoc($result) ){
+        $response['filters'][] = $row;   
+    }
 
 
 
