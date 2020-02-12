@@ -23,6 +23,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/admin">Главная <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/admin/catalog.php">Все товары</a>
+                <a class="nav-item nav-link" href="/admin/newproduct.php">Добавить новый товар</a>
                 <a class="nav-item nav-link" href="/admin/auth.php">Авторизация</a>
                 <a class="nav-item nav-link" href="/admin/reg.php">Регистрация</a>
             </div>
