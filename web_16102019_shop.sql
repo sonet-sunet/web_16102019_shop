@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Фев 07 2020 г., 09:57
+-- Время создания: Фев 14 2020 г., 09:57
 -- Версия сервера: 10.1.37-MariaDB
 -- Версия PHP: 7.3.1
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `catalogs_products` (
   `product_id` int(11) NOT NULL,
   `catalog_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `catalogs_products`
@@ -80,7 +80,36 @@ INSERT INTO `catalogs_products` (`id`, `product_id`, `catalog_id`) VALUES
 (14, 13, 1),
 (15, 14, 1),
 (16, 15, 1),
-(17, 16, 1);
+(17, 16, 1),
+(18, 18, 1),
+(19, 18, 2),
+(20, 18, 4),
+(21, 19, 1),
+(22, 19, 2),
+(23, 19, 3),
+(24, 20, 1),
+(25, 20, 2),
+(26, 20, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `deliveries`
+--
+
+CREATE TABLE IF NOT EXISTS `deliveries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `delivery_price` float NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `name`, `delivery_price`) VALUES
+(1, 'Курьерская доставка', 500);
 
 -- --------------------------------------------------------
 
@@ -107,6 +136,72 @@ INSERT INTO `managers` (`id`, `fio`, `email`, `pass`, `access`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_price` float NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `delivery_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `full_price`, `status`, `payment_id`, `user_id`, `date_create`, `delivery_id`) VALUES
+(1, 10800, 'accepted', 2, 1, '2020-02-13 20:34:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_items`
+--
+
+CREATE TABLE IF NOT EXISTS `order_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `sizes_products_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `sizes_products_id`, `quantity`, `price`) VALUES
+(1, 1, 6, 2, 10800);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `payments`
+--
+
+CREATE TABLE IF NOT EXISTS `payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `payments`
+--
+
+INSERT INTO `payments` (`id`, `name`) VALUES
+(1, 'Наличные при получении'),
+(2, 'Картой при получении');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `products`
 --
 
@@ -119,14 +214,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   `sku` varchar(255) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
 --
 
 INSERT INTO `products` (`id`, `active`, `name`, `price`, `photo`, `sku`, `description`) VALUES
-(1, '1', 'Ботинки', 5400, '/images/catalog/10.jpg', '425453', 'Описание про ботинки'),
+(1, '1', 'Ботинки Красивые', 5400, '/images/catalog/10.jpg', '425453', 'Описание про ботинки'),
 (2, '1', 'Кожаная куртка', 22500, '/images/catalog/2.jpg', '8459845', 'Описание про кожаную куртку'),
 (3, '1', 'Куртка синяя 2', 5400, '/images/catalog/1.jpg', '425453', 'Описание про синею куртку 2'),
 (4, '1', 'Кожаная куртка 2', 22500, '/images/catalog/2.jpg', '8459845', 'Описание про кожаную куртку 2'),
@@ -141,7 +236,11 @@ INSERT INTO `products` (`id`, `active`, `name`, `price`, `photo`, `sku`, `descri
 (13, '1', 'Куртка синяя 7', 5400, '/images/catalog/1.jpg', '425453', 'Описание про синею куртку'),
 (14, '1', 'Кожаная куртка 7', 22500, '/images/catalog/2.jpg', '8459845', 'Описание про кожаную куртку'),
 (15, '1', 'Куртка синяя 8', 5400, '/images/catalog/1.jpg', '425453', 'Описание про синею куртку 4'),
-(16, '1', 'Кожаная куртка 8', 22500, '/images/catalog/2.jpg', '8459845', 'Описание про кожаную куртку 4');
+(16, '1', 'Кожаная куртка 8', 22500, '/images/catalog/2.jpg', '8459845', 'Описание про кожаную куртку 4'),
+(17, '1', 'Тест', 1900, '', 'sdfasdf33qs', ''),
+(18, '1', 'Тест 2', 1900, '', 'sdfasdf33qs', ''),
+(19, '1', 'Тестирование', 123123, '', 'sdfasdf33qs', 'efdf'),
+(20, '1', 'Тестирование', 123123, '/images/catalog/logo.png', 'sdfasdf33qs', 'efdf');
 
 -- --------------------------------------------------------
 
@@ -203,6 +302,31 @@ INSERT INTO `sizes_products` (`id`, `size_id`, `product_id`, `quantity`) VALUES
 (5, 10, 1, 4),
 (6, 11, 1, 3),
 (7, 12, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `postcode` int(11) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `postcode`, `phone`, `email`) VALUES
+(1, 'Михаил', 'Ботинкин', 'улица Короткая Спасская, 78, кв. 99', 'Москва', 148903, '891691691691', 'misha-sandal@ya.ru');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
