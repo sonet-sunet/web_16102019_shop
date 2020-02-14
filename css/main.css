@@ -1,6 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  cursor: default;
+}
+
 a {
   text-decoration: none;
   color: black;
+  z-index: 100;
+  cursor: pointer;
 }
 
 p {
@@ -56,14 +67,14 @@ h3 {
   position: relative;
 }
 
-.cards-center .cards-item:nth-child(6)::after {
+.dark {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 h3.arrow {

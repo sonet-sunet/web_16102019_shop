@@ -68,6 +68,7 @@
                     </div>
 
                     <div class="cards-item square pic" style ="background-image: url(/images/6.jpg);">
+                        <div class="dark"></div>
                         <a class = "to-catalog" href="">
                             <h3 class="h3 uppercase center color-white">спортивная одежда</h3>
                             <p class="card-item-text center cursive lowercase color-white">от 590 руб.</p>
@@ -90,7 +91,7 @@
                 </div>
                 <div class="cards-item long pic" style ="background-image: url(/images/4.jpg);">
                     <a class = "to-catalog" href="">                   
-                        <h3 class="h3 uppercase center color-white">детская одежда</h3>
+                        <h3 class="h3 uppercase center color-white">детская<br> одежда</h3>
                         <p class="card-item-text cursive uppercase center color-white">new arrival</p>
                     </a>
                 </div>
