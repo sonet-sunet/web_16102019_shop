@@ -14,6 +14,7 @@
     ];
 
    if( isset( $_GET['id']) ){
+       
        $id = $_GET['id'];
 
        $sql_catalog = "SELECT * FROM catalogs WHERE id = {$id}";
