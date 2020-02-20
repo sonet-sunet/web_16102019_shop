@@ -29,13 +29,13 @@
     <div class="catalog-filters">
         <form class="catalog-filters-form" method="GET">
             <select class="catalog-filters-form-first" name="firstList">
-                <option value="Категория" disabled selected></option>
+                <option disabled selected>Категория</option>
             </select>
             <select class="catalog-filters-form-second" name="secondList">
-                <option value="Размер" disabled selected></option>
+                <option disabled selected>Размер</option>
             </select>
             <select class="catalog-filters-form-third" name="thirdList">
-                <option value="Стоимость" disabled selected></option>
+                <option disabled selected>Стоимость</option>
             </select>
         </form>
     </div>

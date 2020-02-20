@@ -19,10 +19,14 @@
 
     if( isset( $_GET['id']) ){
         $id = $_GET['id'];
-
         $sql = "SELECT products.* FROM products
         INNER JOIN catalogs_products ON products.id = catalogs_products.product_id
         WHERE catalogs_products.catalog_id = {$id}";
+
+        if( isset($_GET['prices']) && ($_GET['prices']!= '1') ){
+            $sql= $sql." AND products.price {$_GET['prices']}";
+        }
+
         $result = mysqli_query($db, $sql);
 
         $count_products = mysqli_num_rows($result);
@@ -33,11 +37,7 @@
 
         $after_row = ($now_page - 1) * $products_on_page;
 
-        $sql_products = "SELECT products.* FROM products
-        INNER JOIN catalogs_products ON products.id = catalogs_products.product_id
-        WHERE catalogs_products.catalog_id = {$id}
-        LIMIT {$after_row}, {$products_on_page}
-        ";
+        $sql_products = $sql." LIMIT {$after_row}, {$products_on_page}";
 
         $result_products = mysqli_query($db, $sql_products);
     
@@ -47,15 +47,12 @@
 
     }
 
+    $sql_filters = "SELECT * FROM catalog_filters";
+    $result_filters = mysqli_query($db, $sql_filters);
     
-    $sql = "SELECT * FROM catalog_filters";
-    $result = mysqli_query($db, $sql);
-    
-    while( $row = mysqli_fetch_assoc($result) ){
+    while( $row = mysqli_fetch_assoc($result_filters) ){
         $response['filters'][] = $row;   
     }
-
-
 
     // sleep(3);
     echo json_encode($response);

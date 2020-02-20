@@ -21,21 +21,30 @@ class Products{
         return el;
     }
 }
+class Filter{
+    constructor(id, name, catalog_id, value){
+        this.id = id;
+        this.name = name;
+        this.catalog_id = catalog_id;
+        this.value = value;
+    }
+}
 
 class Catalog{
     constructor(){
         this.el = document.querySelector('.catalog');
         this.id = this.el.getAttribute('data-catalog-id');
         this.products = [];
+        this.filters = [];
         this.path = '/handlers/catalog_handler.php';
     }
-    load(nowPage = 1){
+    load(nowPage = 1, categ = 1, size = 1, price = 1){
         this.showPreloader();
         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', this.path + `?id=${this.id}&now_page=${nowPage}`);
+        xhr.open('GET', this.path + `?id=${this.id}&now_page=${nowPage}&categories=${categ}&sizes=${size}&prices=${price}`);
         xhr.send();
-
+        console.log(categ, size, price);
         xhr.addEventListener('load', ()=>{
             this.clear();
             let data = JSON.parse(xhr.responseText);
@@ -45,14 +54,20 @@ class Catalog{
                     item.id, item.active, item.name, item.price, item.photo, item.sku, item.description
                 ));    
             });
-
+            data.filters.forEach((item)=>{
+                this.filters.push(new Filter(
+                    item.id, item.name, item.catalog_id, item.value
+                ));
+            });
             this.hiderPreloader();
             this.render(data);
         });
     }
     render(data){
         this.renderProducts();
-        this.renderFilters();
+        if (rendered == false){
+            this.renderFilters();
+        }
         this.renderPagination(data.pagination);
     }
     renderProducts(){
@@ -62,7 +77,38 @@ class Catalog{
         });
     }
     renderFilters(){
-
+        let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
+        let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
+        let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
+        this.filters.forEach(filter => {
+            if(filter.catalog_id == 1){
+                filtersFirstList.innerHTML+=  `
+                <option value="${filter.name}">${filter.name}</option>
+            `;
+            }else if (filter.catalog_id == 2) {
+                filtersSecondList.innerHTML+=  `
+                <option value="${filter.name}">${filter.name}</option>
+            `;
+            }else if(filter.catalog_id == 3){
+                filtersThirdList.innerHTML+=  `
+                <option value="${filter.value}">${filter.name}</option>
+            `;
+            };
+        });
+        rendered = true;
+        let categories, sizes, prices;
+        filtersFirstList.addEventListener('change',function(){
+            categories = filtersFirstList.value;
+            catalog.load(1 ,categories, sizes, prices);
+        });
+        filtersSecondList.addEventListener('change',function(){
+            sizes = filtersSecondList.value;
+            catalog.load(1 ,categories, sizes, prices);
+        });
+        filtersThirdList.addEventListener('change',function(){
+            prices = filtersThirdList.value;
+            catalog.load(1 ,categories, sizes, prices);
+        });
     }
     renderPagination(dataPagination){
         let paginationEl = this.el.querySelector('.catalog-pagination');
@@ -107,6 +153,6 @@ class Catalog{
         this.el.querySelector('.catalog-preloader').style.display = 'none';
     }
 }
-
+let rendered = false;
 let catalog = new Catalog();
 catalog.load();
