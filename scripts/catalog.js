@@ -1,3 +1,4 @@
+
 class Products{
     constructor(id, active, name, price, photo, sku, description){
         this.id = id;
@@ -39,6 +40,7 @@ class Catalog{
         this.path = '/handlers/catalog_handler.php';
     }
     load(nowPage = 1, categ = 1, size = 1, price = 1){
+        
         this.showPreloader();
         let xhr = new XMLHttpRequest();
 
@@ -96,7 +98,6 @@ class Catalog{
             };
         });
         rendered = true;
-        let categories, sizes, prices;
         filtersFirstList.addEventListener('change',function(){
             categories = filtersFirstList.value;
             catalog.load(1 ,categories, sizes, prices);
@@ -107,7 +108,7 @@ class Catalog{
         });
         filtersThirdList.addEventListener('change',function(){
             prices = filtersThirdList.value;
-            catalog.load(1 ,categories, sizes, prices);
+            catalog.load(1, categories, sizes, prices);
         });
     }
     renderPagination(dataPagination){
@@ -135,7 +136,7 @@ class Catalog{
 
                 let num = e.target.innerHTML;
                 console.log(num);
-                this.load(num);
+                this.load(num, categories, sizes, prices);
             });
 
         }
@@ -153,6 +154,8 @@ class Catalog{
         this.el.querySelector('.catalog-preloader').style.display = 'none';
     }
 }
-let rendered = false;
+ 
+var categories, sizes, prices;
+var rendered = false;
 let catalog = new Catalog();
 catalog.load();

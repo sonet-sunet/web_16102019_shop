@@ -12,6 +12,7 @@
 
     $products_on_page = 3;
     $now_page = 1;
+    $response['pagination']['countPage'] = 0;
 
     if( isset( $_GET['now_page'] ) ){
         $now_page = (int) $_GET['now_page'];
@@ -20,11 +21,20 @@
     if( isset( $_GET['id']) ){
         $id = $_GET['id'];
         $sql = "SELECT products.* FROM products
-        INNER JOIN catalogs_products ON products.id = catalogs_products.product_id
-        WHERE catalogs_products.catalog_id = {$id}";
+        INNER JOIN catalogs_products ON products.id = catalogs_products.product_id";
+        if (isset($_GET['sizes']) && ($_GET['sizes']!= '1')){
+            $sql = $sql." INNER JOIN sizes_products ON products.id = sizes_products.product_id
+            INNER JOIN sizes ON sizes.id = sizes_products.size_id
+            WHERE catalogs_products.catalog_id  = {$id} AND sizes.size = {$_GET['sizes']}";
+         }else{
+            $sql = $sql." WHERE catalogs_products.catalog_id = {$id}";
+        }
 
         if( isset($_GET['prices']) && ($_GET['prices']!= '1') ){
             $sql= $sql." AND products.price {$_GET['prices']}";
+        }
+        if( isset($_GET['categories']) && ($_GET['categories']!= '1') ){
+            $sql= $sql." AND products.name LIKE '%{$_GET['categories']}%'";
         }
 
         $result = mysqli_query($db, $sql);
