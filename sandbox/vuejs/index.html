@@ -8,6 +8,17 @@
 <body>
     <div class="app">
         {{message}}
+        <div class="app-name">
+            {{name}}
+        </div>
+    </div>
+    <hr>
+    <div class="counter">
+        <div><b>Осталось секунд</b>: {{seconds}}</div>
+        <div><b>Кол-во кликов</b>: {{countClicks}}</div>
+        <div>Результат: {{result}}</div>
+        <button v-if="!gameIsStart" v-on:click="startGame">Начать игру</button>
+        <button v-if="gameIsStart" v-on:click="addCount">Кликай сюда</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="script.js"></script>
