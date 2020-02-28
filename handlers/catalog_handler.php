@@ -55,14 +55,15 @@
             $response['products'][] = $row;    
         }
 
+        $sql_filter_categories = "SELECT DISTINCT categories.* FROM categories INNER JOIN categories_products ON categories.id = categories_products.categories_id INNER JOIN catalogs_products ON catalogs_products.catalog_id = {$_GET['id']} AND categories_products.product_id = catalogs_products.product_id";
+        $result_filter_categories = mysqli_query($db, $sql_filter_categories);
+    
+        while( $row = mysqli_fetch_assoc($result_filters) ){
+            $response['filters']['categories'] = $row;   
+        }
     }
 
-    $sql_filters = "SELECT * FROM catalog_filters";
-    $result_filters = mysqli_query($db, $sql_filters);
     
-    while( $row = mysqli_fetch_assoc($result_filters) ){
-        $response['filters'][] = $row;   
-    }
 
     // sleep(3);
     echo json_encode($response);
