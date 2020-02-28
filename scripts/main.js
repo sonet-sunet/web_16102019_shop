@@ -1,6 +1,3 @@
-
-
-
 var width = document.querySelector(".wrapper").offsetWidth;
 var cards = document.querySelector(".cards");
 
@@ -35,7 +32,9 @@ for (let i = 0; i < long.length; i++) {
     element.style.width = width*0.25 + "px";
 }
 
-
+window.addEventListener('resize', ()=>{
+    console.log(window.innerWidth);
+});
 
 
 
