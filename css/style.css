@@ -5,10 +5,107 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  cursor: default;
 }
 
-.wrapper {
+body .wrapper {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+body a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body p {
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.header {
+  border-bottom: 2px solid #dbdbdb;
+  padding: 35px 0;
+}
+
+.header .header-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-nav .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-nav .flex .flex-el {
+  margin-right: 23px;
+}
+
+.header .header-nav .flex .sh {
+  margin-right: 50px;
+  width: 35px;
+  height: 35px;
+  background-color: black;
+  text-align: center;
+  line-height: 35px;
+  text-transform: uppercase;
+  color: white;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+footer .block {
+  width: 27%;
+  padding-bottom: 20px;
+}
+
+footer .block:nth-child(2) {
+  border-right: 2px solid #dddddd;
+}
+
+footer .block:nth-child(1) {
+  border-right: 2px solid #dddddd;
+}
+
+footer .block p {
+  margin-bottom: 7px;
+}
+
+footer .h3 {
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.img {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  margin-left: 7px;
 }
 /*# sourceMappingURL=style.css.map */

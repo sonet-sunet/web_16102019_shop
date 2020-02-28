@@ -29,14 +29,28 @@
     <div class="wrapper">
         <header class="header">
             <nav class="header-nav">
-                <?php foreach($template['catalogs'] as $catalog): ?>
-                    <a href="/catalog.php?id=<?=$catalog['id']?>" class="header-nav-a"><?=$catalog['name']?></a>
-                <?php endforeach;?>
-            </nav>
-            <div class='header-userbasket'>
-                <div class="header-userbasket-user"></div>
-                <div class="header-userbasket-basket">
-                    <a href="/basket.php" class="header-userbasket-basket-a">Корзина</a>
+                
+                <div class = 'flex'>
+                <a href="/index.php" class="sh flex-el"><img src="/images/icons/logo.jpg" alt=""></a>
+                    <?php foreach($template['catalogs'] as $catalog): ?>
+                        <a href="/catalog.php?id=<?=$catalog['id']?>" class="header-nav-a flex-el"><?=$catalog['name']?></a>
+                    <?php endforeach;?>
+                    <a href="/index.php" class="header-userbasket-basket-a flex-el">О нас</a>
                 </div>
-            </div>
+                
+                
+                <div class='header-userbasket flex'>
+                    <!-- <div class="header-userbasket-user"> -->
+                    <img src="/images/icons/account.png" alt="">
+                        <a href="#" class="header-userbasket-basket-a flex-el">
+                            Войти
+                        </a>
+                    <!-- </div> -->
+                    <img src="/images/icons/bascet.png" alt="">
+                    <div class="header-userbasket-basket">
+                        <a href="/basket.php" class="header-userbasket-basket-a">Корзина</a>
+                    </div>
+                </div>                
+            </nav>
+
         </header>

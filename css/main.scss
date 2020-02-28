@@ -3,21 +3,27 @@
     padding: 0;
     
 }
-body{
-    cursor: default;
-}
 a{
     text-decoration: none;
     color: black;
     z-index: 100;
     cursor: pointer;
 }
-p{
+h1{
     font-weight: 300;
+    font-size: 50px;
+    margin-bottom: 20px!important;
+}
+h2{
+    font-weight: 300;
+    font-size: 30px;
+    text-transform: uppercase;
 }
 h3{
     font-weight: 300;
 }
+
+
 .color-white{
     color: white;
 }
@@ -34,8 +40,8 @@ h3{
     background-color: rgb(189, 189, 189);
 }
 .cards-item{
-    width: 33vh;
-    height: 33vh;
+    width: 0;
+    height: 0;
     // background-color: lightcoral;
     background-position: center center;
     background-repeat: no-repeat;
@@ -75,14 +81,14 @@ h3.arrow{
 .svg-icon{
     width: 100%;
     height: 25px;
-
+    .svg-icon.eye{
+        height: 35px;
+    }
 }
 .cards-item.long{
-    height: 66vh;
+    height: 66%;
 }
-.svg-icon.eye{
-    height: 35px;
-}
+
 .cards-left, .cards-right{
     display: flex;
     justify-content: space-between;
@@ -91,7 +97,7 @@ h3.arrow{
 
 }
 .cards-center{
-    width: 66vh;
+    width: 66%;
 }
 .cards, .cards-center{
     display: flex;
@@ -100,7 +106,7 @@ h3.arrow{
 
 }
 .cards{
-
+    width: 100%;
 }
 .wrap{
     flex-wrap: wrap;
@@ -109,4 +115,35 @@ h3.arrow{
 .center{
     text-align: center;
     margin: 0 auto;
+}
+.button{
+    padding: 15px;
+    border: 2px solid rgb(219, 219, 219);
+    color:rgb(145, 145, 145);
+    width: max-content;
+    margin: 60px auto 20px auto!important;
+}
+.button-form{
+    padding: 15px;
+    border: 1px solid rgb(255, 95, 31);
+    background-color: rgb(255, 122, 60);
+    color: white;
+    width: max-content;
+    margin: 60px auto 20px auto!important;
+    text-transform: uppercase;
+}
+.main-top{
+    padding: 100px 0 30px 0;
+}
+.about{
+    font-size: 22px;
+    color: rgb(117, 117, 117);
+}
+
+.main-bottom{
+    padding: 200px 0;
+}
+
+.input{
+    
 }
