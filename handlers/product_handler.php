@@ -11,7 +11,7 @@
         if( isset( $_SESSION['basket'] ) ){
             $is_find = false;
             foreach($_SESSION['basket'] as $basketKey => $basketItem){
-                if( $basketItem['id'] == $id ){
+                if( $basketItem['id'] == $id && $basketItem['size_id'] == $size ){
                     $_SESSION['basket'][$basketKey]['count']++;
                     
                     $is_find = true;
