@@ -1,0 +1,145 @@
+@media (max-width: 1200px) {
+  .cards {
+    width: 900px;
+    margin: 0 auto;
+  }
+  .cards-item {
+    width: 225px;
+    height: 225px;
+  }
+  .cards-item.long {
+    height: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cards {
+    width: 600px;
+    margin: 0 auto;
+  }
+  .cards-item {
+    width: 150px;
+    height: 150px;
+    padding: 0;
+  }
+  .cards-item.long {
+    height: 300px;
+  }
+  svg {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  img, .sh {
+    display: none;
+  }
+  .images img {
+    display: inline;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .cards-item {
+    width: 125px;
+    height: 125px;
+  }
+  .cards-item.long {
+    height: 250px;
+  }
+  .header-userbasket-basket-a {
+    display: none;
+  }
+  .header-img {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .h1 {
+    font-size: 40px;
+  }
+  .about {
+    font-size: 20px;
+  }
+  body p {
+    font-size: 13px;
+  }
+  h3 {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .cards {
+    width: 100%;
+    margin: 0 auto;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .cards-center {
+    width: 50vw;
+  }
+  .cards-item {
+    width: 50vw;
+    height: 50vw;
+  }
+  .cards-item.long {
+    height: 100vw;
+  }
+  .main-bottom {
+    padding: 100px 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .header {
+    padding: 10px;
+  }
+  .flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .flex-el {
+    margin-right: 0 !important;
+  }
+  .header-nav {
+    -webkit-box-align: stretch !important;
+        -ms-flex-align: stretch !important;
+            align-items: stretch !important;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .block:nth-child(2) {
+    display: none;
+  }
+  .block:nth-child(1) {
+    display: none;
+  }
+  .block:nth-child(3) {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=media.css.map */

@@ -21,9 +21,9 @@
             <p>Сайт разработан в <a href="inordic.ru">inordic.ru</a></p>
             <p>2018 Все права защищены</p>
             <div class="images">
-                <div class="img"></div>
-                <div class="img"></div>
-                <div class="img"></div>
+                <img src="/images/icons/account.png" alt="" class="img">
+                <img src="/images/icons/account.png" alt="" class="img">
+                <img src="/images/icons/account.png" alt="" class="img">
             </div>
         </div>
     </footer>

@@ -3,29 +3,6 @@
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  z-index: 100;
-  cursor: pointer;
-}
-
-h1 {
-  font-weight: 300;
-  font-size: 50px;
-  margin-bottom: 20px !important;
-}
-
-h2 {
-  font-weight: 300;
-  font-size: 30px;
-  text-transform: uppercase;
-}
-
-h3 {
-  font-weight: 300;
-}
-
 .color-white {
   color: white;
 }
@@ -47,8 +24,8 @@ h3 {
 }
 
 .cards-item {
-  width: 0;
-  height: 0;
+  width: 300px;
+  height: 300px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -95,10 +72,10 @@ h3.arrow {
 }
 
 .cards-item.long {
-  height: 66%;
+  height: 600px;
 }
 
-.cards-left, .cards-right {
+.cards-left, .cards-right, .cards-center, .cards-center-center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,7 +92,7 @@ h3.arrow {
 }
 
 .cards-center {
-  width: 66%;
+  width: 300px;
 }
 
 .cards, .cards-center {
@@ -131,7 +108,7 @@ h3.arrow {
 }
 
 .cards {
-  width: 100%;
+  width: 1200px;
 }
 
 .wrap {
@@ -177,5 +154,10 @@ h3.arrow {
 
 .main-bottom {
   padding: 200px 0;
+}
+
+.input {
+  width: 250px;
+  padding: 14px;
 }
 /*# sourceMappingURL=main.css.map */
