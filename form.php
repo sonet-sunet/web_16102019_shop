@@ -32,13 +32,7 @@
             $result_client = mysqli_query($db, $sql_client);
             if($result_client){
                 echo "
-                    <div class='bgc-blue'>
-                        <div class='wrapper'>
-                            <div class='call-us'>
-                                <a href = '/index.php' style = 'color: white; margin: 0 auto; font-size: 35px;'><div class='call-us_button'>перейти на главную страницу</div></a>
-                            </div>
-                        </div>
-                    </div>    
+                    успешно
                 ";
             }else{
                 echo 'К сожалению у нас технические трудности, позвоните или напишите нам для отправления заявки.';

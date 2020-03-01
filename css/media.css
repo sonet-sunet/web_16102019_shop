@@ -28,6 +28,12 @@
   svg {
     display: none;
   }
+  .form-success-message {
+    width: 100% !important;
+    font-size: 25px !important;
+    padding: 0 0 70px 0 !important;
+    text-align: right;
+  }
 }
 
 @media (max-width: 760px) {
