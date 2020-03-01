@@ -103,9 +103,9 @@
     <div class="main-bottom">
         <h2 class="h2 email center">будь всегда в курсе выгодных предложений</h2>
         <p class="about cursive center">Подписывайся и следи за новинкамии выгодными предложениями.</p>
-        <form action="" class="form center">
-            <input type="email" placeholder="e-mail" class = "input cursive">
-            <button class = "button-form">записаться</button>
+        <form action="/form.php" method="POST" class="form center">
+            <input type="email" name="mail" placeholder="e-mail" class = "input cursive">
+            <button class = "button-form" type="submit">записаться</button>
         </form>
     </div>
 </div>

@@ -159,5 +159,12 @@ h3.arrow {
 .input {
   width: 250px;
   padding: 14px;
+  border: 1px solid #757575;
+}
+
+.error {
+  width: 250px;
+  padding: 14px;
+  border: 2px solid #f88484;
 }
 /*# sourceMappingURL=main.css.map */

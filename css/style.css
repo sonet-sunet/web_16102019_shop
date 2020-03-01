@@ -130,4 +130,39 @@ footer .h3 {
   border: 1px solid black;
   margin-right: 7px;
 }
+
+.success-container {
+  position: relative;
+}
+
+.success-container .success-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 50px;
+  height: 50px;
+  bottom: 5px;
+  z-index: 101;
+  background: url(/files/images/logo777.png) center center/contain no-repeat;
+}
+
+.success-container .form-success-message {
+  position: relative;
+  width: 58vw;
+  background-color: #ebebeb;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 0 50px;
+  text-align: center;
+  font-size: 50px;
+  color: #1b1b1b;
+  padding-bottom: 100px;
+  font-weight: 100;
+}
+
+.success-container .form-success-message .form-success-message-text {
+  padding-top: 70px;
+}
 /*# sourceMappingURL=style.css.map */
