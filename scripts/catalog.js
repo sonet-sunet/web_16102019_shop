@@ -23,11 +23,10 @@ class Products{
     }
 }
 class Filter{
-    constructor(id, name, catalog_id, value){
+    constructor(id, name, list){
         this.id = id;
         this.name = name;
-        this.catalog_id = catalog_id;
-        this.value = value;
+        this.list = list
     }
 }
 
@@ -56,9 +55,9 @@ class Catalog{
                     item.id, item.active, item.name, item.price, item.photo, item.sku, item.description
                 ));    
             });
-            data.filters.forEach((item)=>{
+            data.filters.categories.forEach((item)=>{
                 this.filters.push(new Filter(
-                    item.id, item.name, item.catalog_id, item.value
+                    item.id, item.name, item.list = "categories"
                 ));
             });
             this.hiderPreloader();
@@ -67,9 +66,7 @@ class Catalog{
     }
     render(data){
         this.renderProducts();
-        if (rendered == false){
-            this.renderFilters();
-        }
+        this.renderFilters();
         this.renderPagination(data.pagination);
     }
     renderProducts(){
@@ -82,33 +79,38 @@ class Catalog{
         let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
         let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
         let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
+        this.clearFilters();
         this.filters.forEach(filter => {
-            if(filter.catalog_id == 1){
+            if (filter.list == "categories"){
                 filtersFirstList.innerHTML+=  `
                 <option value="${filter.name}">${filter.name}</option>
             `;
-            }else if (filter.catalog_id == 2) {
-                filtersSecondList.innerHTML+=  `
-                <option value="${filter.name}">${filter.name}</option>
-            `;
-            }else if(filter.catalog_id == 3){
-                filtersThirdList.innerHTML+=  `
-                <option value="${filter.value}">${filter.name}</option>
-            `;
-            };
+        }
+        
+            // }else if (filter.catalog_id == 2) {
+            //     filtersSecondList.innerHTML+=  `
+            //     <option value="${filter.name}">${filter.name}</option>
+            // `;
+            // }else if(filter.catalog_id == 3){
+            //     filtersThirdList.innerHTML+=  `
+            //     <option value="${filter.value}">${filter.name}</option>
+            // `;
+            
         });
-        rendered = true;
         filtersFirstList.addEventListener('change',function(){
             categories = filtersFirstList.value;
             catalog.load(1 ,categories, sizes, prices);
+            categories = 0;
         });
         filtersSecondList.addEventListener('change',function(){
             sizes = filtersSecondList.value;
             catalog.load(1 ,categories, sizes, prices);
+            sizes = 0;
         });
         filtersThirdList.addEventListener('change',function(){
             prices = filtersThirdList.value;
             catalog.load(1, categories, sizes, prices);
+            prices = 0;
         });
     }
     renderPagination(dataPagination){
@@ -142,6 +144,11 @@ class Catalog{
         }
 
     }
+    clearFilters(){
+        this.el.querySelector('.catalog-filters-form-first').innerHTML = "<option disabled selected>Категория</option>";
+        this.el.querySelector('.catalog-filters-form-second').innerHTML = "<option disabled selected>Размер</option>";
+        this.el.querySelector('.catalog-filters-form-third').innerHTML = "<option disabled selected>Стоимость</option>";
+    }
     clear(){
         this.el.querySelector('.catalog-products').innerHTML = '';
         this.el.querySelector('.catalog-pagination').innerHTML = '';
@@ -156,6 +163,6 @@ class Catalog{
 }
  
 var categories, sizes, prices;
-var rendered = false;
 let catalog = new Catalog();
 catalog.load();
+console.log(catalog);
