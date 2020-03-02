@@ -52,6 +52,7 @@ $('.form').submit(function(e){
         
     }else{
         Mail.removeClass('error');
+        this.submit();
     }
 });
     
