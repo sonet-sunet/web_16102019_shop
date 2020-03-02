@@ -49,6 +49,8 @@ class Catalog{
         filtersFirstList.addEventListener('change',function(){
             if( filtersFirstList.classList.contains('proccessing') ) return;
             categories = filtersFirstList.value;
+            console.log(this.querySelector(`.${categories}`));
+            this.querySelector(`.${categories}`).setAttribute('selected', 'true');
             catalog.load(1 ,categories, sizes, prices);
             categories = 0;
         });
@@ -110,7 +112,7 @@ class Catalog{
         this.filters.forEach(filter => {
             if (filter.list == "categories"){
                 filtersFirstList.innerHTML+=  `
-                <option value="${filter.name}">${filter.name}</option>
+                <option class="${filter.name}" value="${filter.name}">${filter.name}</option>
             `;
             }
         
