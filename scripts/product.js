@@ -12,6 +12,14 @@ addToCart.addEventListener('click', function(){
             
         });
 
+        let et = document.querySelector('.product-addtocart');
+        
+            et.innerHTML = `Товар добавлен в корзину`
+            
+                this.style.backgroundColor = 'green';
+            
+           
+
     }else{
         let el = document.querySelector('.product-sizes-box-ujas');
         
