@@ -32,6 +32,8 @@
         // Запрос в БД за размерами и заполнение $template['sizes']
 
         d($template);
+
+
     }
 ?>
 <div class="product">
@@ -41,7 +43,21 @@
     <div class="product-price"><?=$template['price']?> руб.</div>
     <p class="product-description"><?=$template['description']?></p>
     <div class="product-sizes">
-        <h2 class="product-sizes-h2">Размеры:</h2>
+        <h2 class="product-sizes-h2" style = "text-align: center;">Размеры:</h2>
+        <div style = "display: flex; justify-content: center; align-items: center;">
+            <?php for($i = 0; $i < $count_rows_sizes; $i++): ?>
+                <?php if($template['sizes'][$i]['quantity']):?>
+                    <div>
+                        <a href="" style = "text-decoration: none; color: blue;" class="exist">[<?=$template['sizes'][$i]['size']?>]</a>&ensp;
+                    </div>
+                <?php endif;?> 
+                <?php if(!$template['sizes'][$i]['quantity']):?>
+                    <div>
+                        <a href="" style = "text-decoration: none; color: black; cursor: default;" class="no-exist">[<?=$template['sizes'][$i]['size']?>]</a>&ensp;
+                    </div>
+                <?php endif;?> 
+            <?php endfor;?>
+        </div>
         <div class="product-sizes-box">
             <div class="product-sizes-box-item no-exist"></div>
         </div>
