@@ -1,3 +1,4 @@
+
 class Products{
     constructor(id, active, name, price, photo, sku, description){
         this.id = id;
@@ -21,21 +22,57 @@ class Products{
         return el;
     }
 }
+class Filter{
+    constructor(id, name, list){
+        this.id = id;
+        this.name = name;
+        this.list = list
+    }
+}
 
 class Catalog{
     constructor(){
         this.el = document.querySelector('.catalog');
         this.id = this.el.getAttribute('data-catalog-id');
         this.products = [];
+        this.filters = [];
         this.path = '/handlers/catalog_handler.php';
+
+        this.initFilters();
     }
-    load(nowPage = 1){
+
+    initFilters(){
+        let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
+        let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
+        let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
+
+        filtersFirstList.addEventListener('change',function(){
+            if( filtersFirstList.classList.contains('proccessing') ) return;
+            categories = filtersFirstList.value;
+            catalog.load(1 ,categories, sizes, prices);
+            categories = 0;
+        });
+        filtersSecondList.addEventListener('change',function(){
+            sizes = filtersSecondList.value;
+            catalog.load(1 ,categories, sizes, prices);
+            sizes = 0;
+        });
+        filtersThirdList.addEventListener('change',function(){
+            prices = filtersThirdList.value;
+            catalog.load(1, categories, sizes, prices);
+            prices = 0;
+        });
+    }
+    load(nowPage = 1, categ = 1, size = 1, price = 1){
+        
         this.showPreloader();
         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', this.path + `?id=${this.id}&now_page=${nowPage}`);
+        xhr.open('GET', this.path + `?id=${this.id}&now_page=${nowPage}&categories=${categ}&sizes=${size}&prices=${price}`);
         xhr.send();
-
+        console.log(categ, size, price);
+        
+        
         xhr.addEventListener('load', ()=>{
             this.clear();
             let data = JSON.parse(xhr.responseText);
@@ -45,7 +82,11 @@ class Catalog{
                     item.id, item.active, item.name, item.price, item.photo, item.sku, item.description
                 ));    
             });
-
+            data.filters.categories.forEach((item)=>{
+                this.filters.push(new Filter(
+                    item.id, item.name, item.list = "categories"
+                ));
+            });
             this.hiderPreloader();
             this.render(data);
         });
@@ -62,7 +103,28 @@ class Catalog{
         });
     }
     renderFilters(){
+        let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
+        let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
+        let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
 
+        this.filters.forEach(filter => {
+            if (filter.list == "categories"){
+                filtersFirstList.innerHTML+=  `
+                <option value="${filter.name}">${filter.name}</option>
+            `;
+            }
+        
+            // }else if (filter.catalog_id == 2) {
+            //     filtersSecondList.innerHTML+=  `
+            //     <option value="${filter.name}">${filter.name}</option>
+            // `;
+            // }else if(filter.catalog_id == 3){
+            //     filtersThirdList.innerHTML+=  `
+            //     <option value="${filter.value}">${filter.name}</option>
+            // `;
+            
+        });
+        
     }
     renderPagination(dataPagination){
         let paginationEl = this.el.querySelector('.catalog-pagination');
@@ -89,16 +151,25 @@ class Catalog{
 
                 let num = e.target.innerHTML;
                 console.log(num);
-                this.load(num);
+                this.load(num, categories, sizes, prices);
             });
 
         }
 
     }
+    clearFilters(){
+        this.filters = [];
+        this.el.querySelector('.catalog-filters-form-first').innerHTML = "<option disabled selected>Категория</option>";
+        this.el.querySelector('.catalog-filters-form-second').innerHTML = "<option disabled selected>Размер</option>";
+        this.el.querySelector('.catalog-filters-form-third').innerHTML = "<option disabled selected>Стоимость</option>";
+    }
     clear(){
         this.el.querySelector('.catalog-products').innerHTML = '';
         this.el.querySelector('.catalog-pagination').innerHTML = '';
         this.products = [];
+        this.clearFilters();
+        
+        console.log(catalog);
     }
     showPreloader(){
         this.el.querySelector('.catalog-preloader').style.display = 'block';
@@ -107,40 +178,8 @@ class Catalog{
         this.el.querySelector('.catalog-preloader').style.display = 'none';
     }
 }
-
+ 
+var categories, sizes, prices;
 let catalog = new Catalog();
 catalog.load();
 
-// let xhr = new XMLHttpRequest();
-
-// xhr.open('GET', '/handlers/catalog_handler.php');
-// xhr.send();
-
-// xhr.addEventListener('load', ()=>{
-//     let data = JSON.parse(xhr.responseText);
-//     // let data1 = data.products[0];
-//     // let data2 = data.products[1]
-//     // console.log(data);
-
-//     // let product = new Products(data1.id, data1.active, data1.name, 
-//     //     data1.price, data1.photo, data1.sku, data1.description);
-
-//     // let product2 = new Products(data2.id, data2.active, data2.name, 
-//     //     data2.price, data2.photo, data2.sku, data2.description);
-    
-//     // document.querySelector('.catalog-products').appendChild( product.getElement() );
-//     // document.querySelector('.catalog-products').appendChild( product2.getElement() );
-
-//     data.products.forEach((item)=>{
-//         let product = new Products(item.id, item.active, item.name, 
-//             item.price, item.photo, item.sku, item.description); 
-
-//         document.querySelector('.catalog-products').appendChild( product.getElement() );      
-//     });
-// });
-
-
-/**
- * Создать класс Products
- * Свойста такие же как в БД
- */

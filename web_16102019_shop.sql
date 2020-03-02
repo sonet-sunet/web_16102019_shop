@@ -1,11 +1,15 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< HEAD
 -- version 4.8.3
+=======
+-- version 4.8.0.1
+>>>>>>> origin/catalog-filters
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Фев 14 2020 г., 09:57
--- Версия сервера: 10.1.37-MariaDB
--- Версия PHP: 7.3.1
+-- Хост: 127.0.0.1
+-- Время создания: Фев 28 2020 г., 10:00
+-- Версия сервера: 10.1.32-MariaDB
+-- Версия PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -90,6 +94,63 @@ INSERT INTO `catalogs_products` (`id`, `product_id`, `catalog_id`) VALUES
 (24, 20, 1),
 (25, 20, 2),
 (26, 20, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `categories`
+--
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Куртки'),
+(2, 'Джинсы'),
+(3, 'Ботинки'),
+(4, 'Кеды');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `categories_products`
+--
+
+CREATE TABLE IF NOT EXISTS `categories_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `categories_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `categories_products`
+--
+
+INSERT INTO `categories_products` (`id`, `product_id`, `categories_id`) VALUES
+(1, 1, 3),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(11, 11, 1),
+(12, 12, 1),
+(13, 13, 1),
+(14, 14, 1),
+(15, 15, 1),
+(16, 16, 1);
 
 -- --------------------------------------------------------
 
