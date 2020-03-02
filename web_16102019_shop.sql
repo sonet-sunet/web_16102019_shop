@@ -1,9 +1,5 @@
 -- phpMyAdmin SQL Dump
-<<<<<<< HEAD
 -- version 4.8.3
-=======
--- version 4.8.0.1
->>>>>>> origin/catalog-filters
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1

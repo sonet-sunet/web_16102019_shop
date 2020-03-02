@@ -17,7 +17,7 @@
 
         $sql_sizes = "SELECT sizes.id, sizes.size, sizes_products.quantity  FROM sizes
         INNER JOIN sizes_products on sizes_products.size_id = sizes.id
-        WHERE sizes_products.product_id = {$id}";
+        WHERE sizes_products.product_id = {$id} ORDER BY sizes.priority";
         $result_sizes = mysqli_query($db, $sql_sizes);
 
         $count_rows_sizes = mysqli_num_rows($result_sizes);
@@ -31,9 +31,7 @@
 
         // Запрос в БД за размерами и заполнение $template['sizes']
 
-        d($template);
-
-
+        // d($template);
     }
 ?>
 <div class="product">
@@ -43,28 +41,29 @@
     <div class="product-price"><?=$template['price']?> руб.</div>
     <p class="product-description"><?=$template['description']?></p>
     <div class="product-sizes">
-        <h2 class="product-sizes-h2" style = "text-align: center;">Размеры:</h2>
-        <div style = "display: flex; justify-content: center; align-items: center;">
-            <?php for($i = 0; $i < $count_rows_sizes; $i++): ?>
-                <?php if($template['sizes'][$i]['quantity']):?>
-                    <div>
-                        <a href="" style = "text-decoration: none; color: blue;" class="exist">[<?=$template['sizes'][$i]['size']?>]</a>&ensp;
-                    </div>
-                <?php endif;?> 
-                <?php if(!$template['sizes'][$i]['quantity']):?>
-                    <div>
-                        <a href="" style = "text-decoration: none; color: black; cursor: default;" class="no-exist">[<?=$template['sizes'][$i]['size']?>]</a>&ensp;
-                    </div>
-                <?php endif;?> 
-            <?php endfor;?>
-        </div>
+        <h2 class="product-sizes-h2">Размеры</h2>
+        <h5 class="product-sizes-h5">Выберите размер</h5>
         <div class="product-sizes-box">
-            <div class="product-sizes-box-item no-exist"></div>
+            
+        <?php
+            foreach($template['sizes'] as $product_size){
+                if($product_size['quantity'] > 0){
+                    echo "<div class='product-sizes-box-item' data-id='{$product_size['id']}'>".$product_size ['size'].'</div>';
+                }
+
+                if($product_size['quantity'] < 1){
+                    echo "<div class='product-sizes-box-item no-exist' data-id='{$product_size['id']}'>".$product_size ['size'].'</div>';
+                }
+            }  
+        ?>
+          
         </div>
+         
     </div>
     <div class="product-addtocart" data-product-id="<?=$template['id']?>">Добавить в коризну</div>
+    <div class="product-sizes-box-ujas"></div>  
 </div>
+
 <?php 
     include($_SERVER['DOCUMENT_ROOT'].'/modules/footer.php');
 ?>
-    
