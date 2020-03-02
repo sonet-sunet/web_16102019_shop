@@ -5,6 +5,7 @@ $('.form').submit(function(e){
     if( Mail.val() == '' ){
         
         Mail.addClass('error');
+        
     }else{
         Mail.removeClass('error');
     }
