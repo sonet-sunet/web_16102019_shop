@@ -13,18 +13,21 @@ addToCart.addEventListener('click', function(){
         });
 
     }else{
-        let el = document.querySelector('.product-sizes-box-item');
-        el.innerHTML = `
-        <div class="product-sizes-error">
-        <h4 class="product-sizes-error-h4">Вы не добавили размер</h4>
-        <button class="product-sizes-error-button">OK</button>
-        </div>  
-        `;
+        let el = document.querySelector('.product-sizes-box-ujas');
+        
+            el.innerHTML = `
+            <div class="product-sizes-error">
+            <h4 class="product-sizes-error-h4">Вы не добавили размер</h4>
+            <button class="product-sizes-error-button">OK</button>
+            </div>  
+            `;
+        
+        document.querySelector('.product-sizes-h5').style.color = 'red';
     }
     let el = document.querySelector('.product-sizes-error-button');
     el.addEventListener('click', function(){ 
-    location.reload();
-       
+    document.querySelector('.product-sizes-error').style.display = 'none';  
+    
 });
 });
 
@@ -37,3 +40,8 @@ arr.forEach((el, index) => {
         console.log(id);     
     });
 });
+
+let es = document.querySelector('.product-sizes-box-item');
+es.addEventListener('click', function(){
+    this.style.backgroundColor = 'orange';
+})

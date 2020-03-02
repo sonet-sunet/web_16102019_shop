@@ -42,8 +42,9 @@
     <p class="product-description"><?=$template['description']?></p>
     <div class="product-sizes">
         <h2 class="product-sizes-h2">Размеры</h2>
+        <h5 class="product-sizes-h5">Выберите размер</h5>
         <div class="product-sizes-box">
-        
+            
         <?php
             foreach($template['sizes'] as $product_size){
                 if($product_size['quantity'] > 0){
@@ -54,14 +55,15 @@
                     echo "<div class='product-sizes-box-item no-exist' data-id='{$product_size['id']}'>".$product_size ['size'].'</div>';
                 }
             }  
-        ?>    
+        ?>
+          
         </div>
          
     </div>
     <div class="product-addtocart" data-product-id="<?=$template['id']?>">Добавить в коризну</div>
+    <div class="product-sizes-box-ujas"></div>  
 </div>
 
 <?php 
     include($_SERVER['DOCUMENT_ROOT'].'/modules/footer.php');
 ?>
-    
