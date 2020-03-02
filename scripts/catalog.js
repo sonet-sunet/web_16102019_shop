@@ -37,6 +37,31 @@ class Catalog{
         this.products = [];
         this.filters = [];
         this.path = '/handlers/catalog_handler.php';
+
+        this.initFilters();
+    }
+
+    initFilters(){
+        let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
+        let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
+        let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
+
+        filtersFirstList.addEventListener('change',function(){
+            if( filtersFirstList.classList.contains('proccessing') ) return;
+            categories = filtersFirstList.value;
+            catalog.load(1 ,categories, sizes, prices);
+            categories = 0;
+        });
+        filtersSecondList.addEventListener('change',function(){
+            sizes = filtersSecondList.value;
+            catalog.load(1 ,categories, sizes, prices);
+            sizes = 0;
+        });
+        filtersThirdList.addEventListener('change',function(){
+            prices = filtersThirdList.value;
+            catalog.load(1, categories, sizes, prices);
+            prices = 0;
+        });
     }
     load(nowPage = 1, categ = 1, size = 1, price = 1){
         
@@ -46,6 +71,8 @@ class Catalog{
         xhr.open('GET', this.path + `?id=${this.id}&now_page=${nowPage}&categories=${categ}&sizes=${size}&prices=${price}`);
         xhr.send();
         console.log(categ, size, price);
+        
+        
         xhr.addEventListener('load', ()=>{
             this.clear();
             let data = JSON.parse(xhr.responseText);
@@ -79,13 +106,13 @@ class Catalog{
         let filtersFirstList = this.el.querySelector('.catalog-filters-form-first');
         let filtersSecondList = this.el.querySelector('.catalog-filters-form-second');
         let filtersThirdList = this.el.querySelector('.catalog-filters-form-third');
-        this.clearFilters();
+
         this.filters.forEach(filter => {
             if (filter.list == "categories"){
                 filtersFirstList.innerHTML+=  `
                 <option value="${filter.name}">${filter.name}</option>
             `;
-        }
+            }
         
             // }else if (filter.catalog_id == 2) {
             //     filtersSecondList.innerHTML+=  `
@@ -97,21 +124,7 @@ class Catalog{
             // `;
             
         });
-        filtersFirstList.addEventListener('change',function(){
-            categories = filtersFirstList.value;
-            catalog.load(1 ,categories, sizes, prices);
-            categories = 0;
-        });
-        filtersSecondList.addEventListener('change',function(){
-            sizes = filtersSecondList.value;
-            catalog.load(1 ,categories, sizes, prices);
-            sizes = 0;
-        });
-        filtersThirdList.addEventListener('change',function(){
-            prices = filtersThirdList.value;
-            catalog.load(1, categories, sizes, prices);
-            prices = 0;
-        });
+        
     }
     renderPagination(dataPagination){
         let paginationEl = this.el.querySelector('.catalog-pagination');
@@ -145,6 +158,7 @@ class Catalog{
 
     }
     clearFilters(){
+        this.filters = [];
         this.el.querySelector('.catalog-filters-form-first').innerHTML = "<option disabled selected>Категория</option>";
         this.el.querySelector('.catalog-filters-form-second').innerHTML = "<option disabled selected>Размер</option>";
         this.el.querySelector('.catalog-filters-form-third').innerHTML = "<option disabled selected>Стоимость</option>";
@@ -153,6 +167,9 @@ class Catalog{
         this.el.querySelector('.catalog-products').innerHTML = '';
         this.el.querySelector('.catalog-pagination').innerHTML = '';
         this.products = [];
+        this.clearFilters();
+        
+        console.log(catalog);
     }
     showPreloader(){
         this.el.querySelector('.catalog-preloader').style.display = 'block';
@@ -165,4 +182,4 @@ class Catalog{
 var categories, sizes, prices;
 let catalog = new Catalog();
 catalog.load();
-console.log(catalog);
+
