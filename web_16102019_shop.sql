@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Фев 07 2020 г., 09:57
--- Версия сервера: 10.1.37-MariaDB
--- Версия PHP: 7.3.1
+-- Хост: 127.0.0.1
+-- Время создания: Мар 02 2020 г., 08:36
+-- Версия сервера: 10.1.35-MariaDB
+-- Версия PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -81,6 +81,26 @@ INSERT INTO `catalogs_products` (`id`, `product_id`, `catalog_id`) VALUES
 (15, 14, 1),
 (16, 15, 1),
 (17, 16, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `clients`
+--
+
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `clients`
+--
+
+INSERT INTO `clients` (`id`, `email`, `create_date`) VALUES
+(1, '660321@yandex.ru', '2020-03-02 10:33:58');
 
 -- --------------------------------------------------------
 
