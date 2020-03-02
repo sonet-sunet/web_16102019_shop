@@ -41,7 +41,13 @@ arr.forEach((el, index) => {
     });
 });
 
-let es = document.querySelector('.product-sizes-box-item');
-es.addEventListener('click', function(){
-    this.style.backgroundColor = 'orange';
-})
+let es = document.querySelectorAll('.product-sizes-box-item');
+es.forEach((es, index) => {
+
+    es.addEventListener('click', function(){
+        this.style.backgroundColor = 'orange';
+    
+    });
+
+});
+
