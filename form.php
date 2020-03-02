@@ -16,7 +16,7 @@
 
         // d($_POST);        
 
-        if(isset($_POST['mail'])){
+        if(!empty($_POST['mail'])){
             echo "
                  <div class='success-container' style = 'background-color:#cee3ef;'>
                      <div class='success-img'></div>
