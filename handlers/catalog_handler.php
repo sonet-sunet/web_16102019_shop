@@ -20,21 +20,22 @@
 
     if( isset( $_GET['id']) ){
         $id = $_GET['id'];
-        $sql = "SELECT products.* FROM products
-        INNER JOIN catalogs_products ON products.id = catalogs_products.product_id";
-        if (isset($_GET['sizes']) && ($_GET['sizes']!= '1')){
-            $sql = $sql." INNER JOIN sizes_products ON products.id = sizes_products.product_id
+        $sql = "SELECT DISTINCT products.* FROM products
+            INNER JOIN catalogs_products ON products.id = catalogs_products.product_id 
+            INNER JOIN categories_products ON products.id = categories_products.product_id
+            INNER JOIN categories ON categories_products.categories_id = categories.id
+            INNER JOIN sizes_products ON products.id = sizes_products.product_id
             INNER JOIN sizes ON sizes.id = sizes_products.size_id
-            WHERE catalogs_products.catalog_id  = {$id} AND sizes.size = {$_GET['sizes']}";
-         }else{
-            $sql = $sql." WHERE catalogs_products.catalog_id = {$id}";
+            WHERE catalogs_products.catalog_id = {$id}";
+        if( isset($_GET['categories']) && ($_GET['categories']!= '-1') ){
+        $sql= $sql." AND categories_products.categories_id = {$_GET['categories']}";
+        }
+        if (isset($_GET['sizes']) && ($_GET['sizes']!= '-1')){
+            $sql = $sql." AND sizes.size = {$_GET['sizes']}";
         }
 
-        if( isset($_GET['prices']) && ($_GET['prices']!= '1') ){
+        if( isset($_GET['prices']) && ($_GET['prices']!= '-1') ){
             $sql= $sql." AND products.price {$_GET['prices']}";
-        }
-        if( isset($_GET['categories']) && ($_GET['categories']!= '1') ){
-            $sql= $sql." AND products.name LIKE '%{$_GET['categories']}%'";
         }
 
         $result = mysqli_query($db, $sql);
@@ -59,11 +60,44 @@
          INNER JOIN categories_products ON categories.id = categories_products.categories_id 
          INNER JOIN catalogs_products ON catalogs_products.catalog_id = {$_GET['id']}
           AND categories_products.product_id = catalogs_products.product_id";
+        if (isset($_GET['sizes']) && ($_GET['sizes']!= '-1')){
+            $sql_filter_categories = $sql_filter_categories." INNER JOIN sizes_products ON catalogs_products.product_id = sizes_products.product_id
+            INNER JOIN sizes ON sizes.id = sizes_products.size_id AND sizes.size = {$_GET['sizes']}";
+        }
+        if ( isset($_GET['prices']) && ($_GET['prices']!= '-1')){
+            $sql_filter_categories = $sql_filter_categories." INNER JOIN products ON products.id = catalogs_products.product_id AND products.price {$_GET['prices']}";
+        }
         $result_filter_categories = mysqli_query($db, $sql_filter_categories);
     
         while( $row = mysqli_fetch_assoc($result_filter_categories) ){
             $response['filters']['categories'][] = $row;   
         }
+        $sql_filter_sizes = "SELECT size_id, size  FROM `sizes` 
+        INNER JOIN sizes_products ON sizes.id = sizes_products.size_id AND sizes_products.quantity > 0 
+        INNER JOIN catalogs_products ON catalogs_products.catalog_id = {$_GET['id']} AND sizes_products.product_id = catalogs_products.product_id";
+        if ( isset($_GET['prices']) && ($_GET['prices']!= '-1')){
+            $sql_filter_sizes = $sql_filter_sizes." INNER JOIN products ON products.id = catalogs_products.product_id AND products.price {$_GET['prices']}";
+        }
+        if ( isset($_GET['categories']) && ($_GET['categories']!= '-1')){
+            $sql_filter_sizes = $sql_filter_sizes." INNER JOIN categories_products ON categories_products.categories_id = {$_GET['categories']} AND categories_products.product_id = catalogs_products.product_id";
+        }
+        $result_filter_sizes = mysqli_query($db, $sql_filter_sizes);
+        while( $row = mysqli_fetch_assoc($result_filter_sizes) ){
+            $response['filters']['sizes'][] = $row;   
+        }
+        $sql_filter_prices = "SELECT DISTINCT price FROM products 
+        INNER JOIN catalogs_products ON products.id = catalogs_products.product_id AND catalogs_products.catalog_id = {$_GET['id']}";
+         if (isset($_GET['sizes']) && ($_GET['sizes']!= '-1')){
+            $sql_filter_prices = $sql_filter_prices." INNER JOIN sizes_products ON catalogs_products.product_id = sizes_products.product_id
+            INNER JOIN sizes ON sizes.id = sizes_products.size_id AND sizes.size = {$_GET['sizes']}";
+        }
+        if ( isset($_GET['categories']) && ($_GET['categories']!= '-1')){
+            $sql_filter_prices = $sql_filter_prices." INNER JOIN categories_products ON categories_products.categories_id = {$_GET['categories']} AND categories_products.product_id = catalogs_products.product_id";
+        }
+         $result_filter_prices = mysqli_query($db, $sql_filter_prices);
+         while( $row = mysqli_fetch_assoc($result_filter_prices) ){
+             $response['filters']['prices'][] = $row;
+         }
     }
 
     

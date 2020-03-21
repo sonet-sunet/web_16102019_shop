@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Фев 28 2020 г., 10:00
--- Версия сервера: 10.1.32-MariaDB
--- Версия PHP: 7.2.5
+-- Время создания: Мар 21 2020 г., 13:14
+-- Версия сервера: 10.4.10-MariaDB
+-- Версия PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,11 +30,10 @@ USE `web_16102019_shop`;
 -- Структура таблицы `catalogs`
 --
 
-CREATE TABLE IF NOT EXISTS `catalogs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `catalogs` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `catalogs`
@@ -52,12 +51,11 @@ INSERT INTO `catalogs` (`id`, `name`) VALUES
 -- Структура таблицы `catalogs_products`
 --
 
-CREATE TABLE IF NOT EXISTS `catalogs_products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `catalogs_products` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `catalog_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+  `catalog_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `catalogs_products`
@@ -97,11 +95,10 @@ INSERT INTO `catalogs_products` (`id`, `product_id`, `catalog_id`) VALUES
 -- Структура таблицы `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `categories`
@@ -119,12 +116,11 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- Структура таблицы `categories_products`
 --
 
-CREATE TABLE IF NOT EXISTS `categories_products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categories_products` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `categories_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  `categories_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `categories_products`
@@ -154,12 +150,11 @@ INSERT INTO `categories_products` (`id`, `product_id`, `categories_id`) VALUES
 -- Структура таблицы `deliveries`
 --
 
-CREATE TABLE IF NOT EXISTS `deliveries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deliveries` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `delivery_price` float NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `delivery_price` float NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `deliveries`
@@ -174,14 +169,13 @@ INSERT INTO `deliveries` (`id`, `name`, `delivery_price`) VALUES
 -- Структура таблицы `managers`
 --
 
-CREATE TABLE IF NOT EXISTS `managers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `managers` (
+  `id` int(11) NOT NULL,
   `fio` varchar(255) NOT NULL,
   `email` varchar(200) NOT NULL,
   `pass` varchar(100) NOT NULL,
-  `access` varchar(10) NOT NULL DEFAULT 'NO',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `access` varchar(10) NOT NULL DEFAULT 'NO'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `managers`
@@ -196,16 +190,15 @@ INSERT INTO `managers` (`id`, `fio`, `email`, `pass`, `access`) VALUES
 -- Структура таблицы `orders`
 --
 
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
   `full_price` float NOT NULL,
   `status` varchar(255) NOT NULL,
   `payment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `delivery_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `date_create` timestamp NOT NULL DEFAULT current_timestamp(),
+  `delivery_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `orders`
@@ -220,14 +213,13 @@ INSERT INTO `orders` (`id`, `full_price`, `status`, `payment_id`, `user_id`, `da
 -- Структура таблицы `order_items`
 --
 
-CREATE TABLE IF NOT EXISTS `order_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `sizes_products_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` float NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `order_items`
@@ -242,11 +234,10 @@ INSERT INTO `order_items` (`id`, `order_id`, `sizes_products_id`, `quantity`, `p
 -- Структура таблицы `payments`
 --
 
-CREATE TABLE IF NOT EXISTS `payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `payments`
@@ -262,16 +253,15 @@ INSERT INTO `payments` (`id`, `name`) VALUES
 -- Структура таблицы `products`
 --
 
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
   `active` enum('0','1') NOT NULL DEFAULT '1',
   `name` varchar(255) NOT NULL,
   `price` float NOT NULL,
   `photo` varchar(255) NOT NULL,
   `sku` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
@@ -305,12 +295,11 @@ INSERT INTO `products` (`id`, `active`, `name`, `price`, `photo`, `sku`, `descri
 -- Структура таблицы `sizes`
 --
 
-CREATE TABLE IF NOT EXISTS `sizes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sizes` (
+  `id` int(11) NOT NULL,
   `size` varchar(100) NOT NULL,
-  `priority` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `priority` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `sizes`
@@ -339,13 +328,12 @@ INSERT INTO `sizes` (`id`, `size`, `priority`) VALUES
 -- Структура таблицы `sizes_products`
 --
 
-CREATE TABLE IF NOT EXISTS `sizes_products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sizes_products` (
+  `id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `quantity` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `sizes_products`
@@ -358,7 +346,8 @@ INSERT INTO `sizes_products` (`id`, `size_id`, `product_id`, `quantity`) VALUES
 (4, 9, 1, 5),
 (5, 10, 1, 4),
 (6, 11, 1, 3),
-(7, 12, 1, 3);
+(7, 12, 1, 3),
+(8, 10, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -366,17 +355,16 @@ INSERT INTO `sizes_products` (`id`, `size_id`, `product_id`, `quantity`) VALUES
 -- Структура таблицы `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `address` text NOT NULL,
   `city` varchar(100) NOT NULL,
   `postcode` int(11) NOT NULL,
   `phone` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
@@ -384,6 +372,170 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `address`, `city`, `postcode`, `phone`, `email`) VALUES
 (1, 'Михаил', 'Ботинкин', 'улица Короткая Спасская, 78, кв. 99', 'Москва', 148903, '891691691691', 'misha-sandal@ya.ru');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `catalogs`
+--
+ALTER TABLE `catalogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `catalogs_products`
+--
+ALTER TABLE `catalogs_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `categories_products`
+--
+ALTER TABLE `categories_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `managers`
+--
+ALTER TABLE `managers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `sizes`
+--
+ALTER TABLE `sizes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `sizes_products`
+--
+ALTER TABLE `sizes_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `catalogs`
+--
+ALTER TABLE `catalogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `catalogs_products`
+--
+ALTER TABLE `catalogs_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT для таблицы `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `categories_products`
+--
+ALTER TABLE `categories_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT для таблицы `deliveries`
+--
+ALTER TABLE `deliveries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `managers`
+--
+ALTER TABLE `managers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT для таблицы `sizes`
+--
+ALTER TABLE `sizes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT для таблицы `sizes_products`
+--
+ALTER TABLE `sizes_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

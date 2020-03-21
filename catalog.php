@@ -37,6 +37,7 @@
             <select class="catalog-filters-form-third" name="thirdList">
                 <option disabled selected>Стоимость</option>
             </select>
+            <button class="clear-filters">Очистить фильтры</button>
         </form>
     </div>
     <div class="catalog-products"></div>
