@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
@@ -162,6 +162,26 @@ CREATE TABLE `deliveries` (
 
 INSERT INTO `deliveries` (`id`, `name`, `delivery_price`) VALUES
 (1, 'Курьерская доставка', 500);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `clients`
+--
+
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `clients`
+--
+
+INSERT INTO `clients` (`id`, `email`, `create_date`) VALUES
+(1, '660321@yandex.ru', '2020-03-02 10:33:58');
 
 -- --------------------------------------------------------
 

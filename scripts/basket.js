@@ -6,6 +6,7 @@ class BasketItem{
         this.price = productInfo.price;
         this.photo = productInfo.photo;
         this.sku = productInfo.sku;
+        this.size = productInfo.size;
         this.description = productInfo.description;
         this.count = productInfo.count;
         this.fullPrice = productInfo.fullPrice;
@@ -19,6 +20,7 @@ class BasketItem{
             <div class='basket-item' style='background-image: url(${this.photo})'></div>
             <div class='basket-item-name'>${this.name}</div>
             <div class='basket-item-sku'>Арт.: ${this.sku}</div>
+            <div class='basket-item-size'>Арт.: ${this.size}</div>
             <div class='basket-item-price'>${this.price} руб.<div>
             <button class='basket-item-add'>+</button>
             <b class='basket-item-count'>${this.count}</b>
